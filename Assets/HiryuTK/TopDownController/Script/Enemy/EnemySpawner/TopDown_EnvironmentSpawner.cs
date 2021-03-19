@@ -3,8 +3,12 @@ using UnityEngine;
 
 namespace HiryuTK.TopDownController
 {
+    /// <summary>
+    /// A spawner for spawning asteroids and enemy ships
+    /// </summary>
     public class TopDown_EnvironmentSpawner : MonoBehaviour
     {
+        //Fields
         [SerializeField] private float spawnIntervalMin = 2f;
         [SerializeField] private float spawnIntervalMax = 10f;
 
@@ -15,43 +19,53 @@ namespace HiryuTK.TopDownController
         private float speedUpMod = 1f;
         private float speedUpSpeed = 0.01f;
 
-
         private void Start()
         {
+            //Reference then start spawning
             settings    = Settings_TopDownController.Instance;
-            poolM       = ObjectPoolManager_TopDown.instance;
+            poolM       = ObjectPoolManager_TopDown.Instance;
             Spawn();
         }
 
         private void Spawn()
         {
-            StartCoroutine(DoSpawn(5));
+            StartCoroutine(DoSpawn());
         }
 
-        private IEnumerator DoSpawn(int spawnCount)
+        /// <summary>
+        /// Coroutine that goes on forever to spawn the environmental objects
+        /// </summary>
+        /// <returns></returns>
+        private IEnumerator DoSpawn()
         {
-            while (spawnCount > 0)
+            //Infinite loop
+            while (true)
             {
+                //Ticks timer when it is above zero
                 if (timer > 0f)
                 {
                     timer -= Time.deltaTime;
                 }
                 else
                 {
+                    //50% chance to spawn a ship or an asteroid
                     if (Random.Range(0, 2) == 0)
                         SpawnAsteroid();
                     else
                         SpawnEnemyShip();
-                    spawnCount--;
                     RefreshTimer();
                 }
                 yield return null;
             }
         }
 
+        /// <summary>
+        /// Reset timer to a regular interval
+        /// </summary>
         void RefreshTimer()
         {
             timer = Random.Range(spawnIntervalMin, spawnIntervalMax);
+            //Gradually shorten the spawn interval
             while (speedUpMod> 0.1f)
             {
                 speedUpMod -= speedUpSpeed;
@@ -59,6 +73,9 @@ namespace HiryuTK.TopDownController
             timer *= speedUpMod;
         }
 
+        /// <summary>
+        /// Method for spawning an asteroid
+        /// </summary>
         private void SpawnAsteroid()
         {
             Vector3 p = settings.RandomSpawnPoint();
@@ -67,6 +84,9 @@ namespace HiryuTK.TopDownController
             poolM.SpawnAsteroid(p, r);
         }
 
+        /// <summary>
+        /// Method for spawning an enemy ship
+        /// </summary>
         private void SpawnEnemyShip ()
         {
             Vector3 p = settings.RandomSpawnPoint();

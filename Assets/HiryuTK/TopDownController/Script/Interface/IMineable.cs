@@ -3,8 +3,11 @@ using UnityEngine;
 
 namespace HiryuTK.TopDownController
 {
-    public interface IDamagable
+    /// <summary>
+    /// Interface for objects that can be mined
+    /// </summary>
+    public interface IMineable
     {
-        void TakeDamage(int amount);
+        void Mine(float amount);
     }
 }

@@ -4,21 +4,30 @@ using System.Collections.Generic;
 
 namespace HiryuTK.TopDownController
 {
+    /// <summary>
+    /// Object pool
+    /// </summary>
     public class Pool
     {
-        Vector3 offscreen = new Vector3(-100, -100, -100);
+        //Fields
+        private List<PoolObject> active = new List<PoolObject>();
+        private List<PoolObject> inactive = new List<PoolObject>();
+        private PoolObject prefab;
+        private Transform parent;
 
-        List<PoolObject> active = new List<PoolObject>();
-        List<PoolObject> inactive = new List<PoolObject>();
-        PoolObject prefab;
-        Transform parent;
-
+        //Contructor
         public Pool(PoolObject prefab, Transform parent)
         {
             this.prefab = prefab;
             this.parent = parent;
         }
 
+        /// <summary>
+        /// Return the prefab either by spawning a new one or pulling from the pool.
+        /// </summary>
+        /// <param name="p"></param>
+        /// <param name="r"></param>
+        /// <returns></returns>
         public PoolObject Spawn(Vector3 p, Quaternion r)
         {
             PoolObject go;
@@ -42,6 +51,10 @@ namespace HiryuTK.TopDownController
             return go;
         }
 
+        /// <summary>
+        /// For returing a poolobject back to its pool.
+        /// </summary>
+        /// <param name="obj"></param>
         public void Despawn(PoolObject obj)
         {
             if (active.Contains(obj))

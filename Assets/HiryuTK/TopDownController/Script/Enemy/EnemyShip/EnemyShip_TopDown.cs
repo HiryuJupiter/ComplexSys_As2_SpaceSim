@@ -6,66 +6,66 @@ namespace HiryuTK.TopDownController
 {
     public class EnemyShip_TopDown : PoolObject, IDamagable
     {
-        private const float avoidanceWeight = 2f;
-
-        float neighborRadius;
-        private List<Transform> asteroids;
+        //Fields
         private PlayerTopDown3DController player;
         Settings_TopDownController settings;
-        private Collider2D collider;
-        private Vector2 moveDir;
-        private bool checkingForCollision;
-        private bool alive;
 
+        #region Public
+        /// <summary>
+        /// Despawn when ship takes damage
+        /// </summary>
+        /// <param name="amount"> dmg amount</param>
+        public void TakeDamage(int amount)
+        {
+            Despawn();
+        }
+        #endregion
 
         #region Object pool
+        /// <summary>
+        /// Setup references and initializations when first spawned
+        /// </summary>
+        /// <param name="pool"></param>
         public override void InitialSpawn(Pool pool)
         {
             base.InitialSpawn(pool);
-            collider = GetComponent<Collider2D>();
             settings = Settings_TopDownController.Instance;
             player = PlayerTopDown3DController.Instance;
         }
 
+        /// <summary>
+        /// When ship is reactived from pool
+        /// </summary>
+        /// <param name="p">Position</param>
+        /// <param name="r">Rotation</param>
         public override void Activation(Vector2 p, Quaternion r)
         {
             base.Activation(p, r);
             transform.position = p;
             transform.rotation = r;
-            moveDir = transform.up;
             //Debug.DrawRay(transform.position, moveDir, Color.yellow, 10f);
-            StartCoroutine(DetectOutOfBounds());
-        }
-
-        //Non-public
-        protected override void Despawn()
-        {
-            Debug.Log("Ship destroyed");
-            checkingForCollision = false;
-            base.Despawn();
         }
         #endregion
 
         #region Mono
-
-
         private void FixedUpdate()
         {
-            //Rotate towards player
+            //Rotate towards player when it is not dead
             if (player != null)
             {
+                //Find the direction to it, the rotation to it, then lerp the ship rotation towards that rotation.
                 Vector3 dirToPlayer = player.transform.position - transform.position;
                 Quaternion targetRot = Quaternion.LookRotation(Vector3.forward, dirToPlayer);
                 transform.rotation = Quaternion.Lerp(transform.rotation, targetRot, settings.EnemyRotation * Time.deltaTime);
 
+                //Move forward
                 transform.Translate(transform.up * settings.EnemyMove * Time.deltaTime, Space.World);
-                //Debug.DrawRay(transform.position, transform.up, Color.magenta, 10f);
             }
-
         }
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
+            //When hits the player, tell the player to take damage.
             if (settings.IsTargetOnPlayerLayer(collision.gameObject))
             {
                 PlayerTopDown3DController p = collision.GetComponent<PlayerTopDown3DController>();
@@ -76,104 +76,8 @@ namespace HiryuTK.TopDownController
                 }
             }
         }
-
-        private void OnDrawGizmosSelected()
-        {
-            Gizmos.DrawSphere(transform.position, neighborRadius);
-        }
         #endregion
 
-        //Public
-        public void TakeDamage(int amount)
-        {
-            Despawn();
-        }
 
-        #region Asteroid avoidance
-
-        private IEnumerator CheckForAsteroidCollision()
-        {
-            checkingForCollision = true;
-            while (checkingForCollision)
-            {
-                DetectAsteroids();
-                AvoidAsteroids();
-                yield return null;
-            }
-        }
-
-        private void DetectAsteroids()
-        {
-            asteroids = new List<Transform>();
-
-            Collider2D[] overlaps = Physics2D.OverlapCircleAll(transform.position, neighborRadius);
-
-            foreach (Collider2D c in overlaps)
-            {
-                if (c != collider)
-                {
-                    Asteroid asteroid = c.GetComponent<Asteroid>();
-                    if (asteroid != null)
-                    {
-                        asteroids.Add(asteroid.transform);
-                    }
-                }
-            }
-        }
-
-        private void AvoidAsteroids()
-        {
-            if (HasAsteroidsNearBy())
-            {
-                Vector2 avoidanceDir = Vector2.zero;
-
-                foreach (Transform a in asteroids)
-                {
-                    avoidanceDir += (Vector2)(transform.position - a.position);
-                }
-                avoidanceDir /= asteroids.Count;
-
-                moveDir += avoidanceDir * avoidanceWeight;
-            }
-        }
-
-        private bool HasAsteroidsNearBy() => asteroids.Count > 0;
-        private Transform GetClosestAsteroid()
-        {
-            Transform closest = null;
-            if (asteroids.Count == 1)
-            {
-                closest = asteroids[0];
-            }
-            else
-            {
-                float closestDist = float.MaxValue;
-                foreach (Transform a in asteroids)
-                {
-                    float dist = Vector2.SqrMagnitude(a.position - transform.position);
-                    if (dist < closestDist)
-                    {
-                        closest = a;
-                        closestDist = dist;
-                    }
-                }
-            }
-            return closest;
-        }
-        #endregion
-
-        private IEnumerator DetectOutOfBounds()
-        {
-            alive = true;
-            yield return new WaitForSeconds(3f);
-            while (alive)
-            {
-                if (settings.IsOutOfBounds(transform.position))
-                {
-                    Despawn();
-                }
-                yield return null;
-            }
-        }
     }
 }

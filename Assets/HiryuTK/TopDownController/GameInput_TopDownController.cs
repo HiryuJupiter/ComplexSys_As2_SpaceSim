@@ -2,9 +2,13 @@
 
 namespace HiryuTK.TopDownController
 {
+    /// <summary>
+    /// For detecting input for this game
+    /// </summary>
     [DefaultExecutionOrder(-1000)]
     public class GameInput_TopDownController : MonoBehaviour
     {
+        //Fields
         public static GameInput_TopDownController Instance;
         public static float MoveX { get; set; }
         public static float MoveY { get; set; }
@@ -14,15 +18,20 @@ namespace HiryuTK.TopDownController
 
         private void Awake()
         {
+            //Lazy singleton
             Instance = this;
         }
 
         private void Update()
         {
+            //For updating input
             DirectionInputUpdate();
             ActionInputUpdate();
         }
 
+        /// <summary>
+        /// For checking directional key inputs
+        /// </summary>
         private void DirectionInputUpdate()
         {
             //LEFT - RIGHT
@@ -54,11 +63,14 @@ namespace HiryuTK.TopDownController
             }
         }
 
+        /// <summary>
+        /// For checking action key inputs
+        /// </summary>
         private void ActionInputUpdate()
         {
             JumpBtnDown = Input.GetKeyDown(KeyCode.Space);
-            JumpBtn = Input.GetKey(KeyCode.Space);
-            JumpBtnUp = Input.GetKeyUp(KeyCode.Space);
+            JumpBtn     = Input.GetKey(KeyCode.Space);
+            JumpBtnUp   = Input.GetKeyUp(KeyCode.Space);
         }
     }
 }

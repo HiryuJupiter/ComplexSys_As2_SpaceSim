@@ -8,13 +8,7 @@ namespace HiryuTK.TopDownController
     {
         public static UIManager_TopDown Instance;
 
-        //public Image healthFG;
         public Text MoneyAmount;
-
-        public void SetHealth (float percentage)
-        {
-            //healthFG.fillAmount = percentage;
-        }
 
         public void SetMoney (int money)
         {

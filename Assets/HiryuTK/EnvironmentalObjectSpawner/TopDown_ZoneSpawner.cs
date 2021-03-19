@@ -2,25 +2,25 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace TafeDiplomaFramework.AI
+namespace HiryuTK.EnvironemntalSpawner
 {
     public class TopDown_ZoneSpawner : MonoBehaviour
     {
         public enum SpawnMode { XYZ, XY, XZ }
 
-        [SerializeField] private SpawnMode spawnMode = SpawnMode.XYZ;
-        [SerializeField] private Vector3 size = Vector3.one;
+        [SerializeField] private SpawnMode spawnMode    = SpawnMode.XYZ;
+        [SerializeField] private Vector3 size           = Vector3.one;
+        [SerializeField] private GameObject prefab      = null;
         [SerializeField, Range(0.01f, 10f)] private float spawnCDMin = 0f;
-        [SerializeField, Range(0.02f, 5f)] private float spawnCDMax = 5f;
-        [SerializeField] private GameObject prefab = null;
+        [SerializeField, Range(0.02f, 5f)]  private float spawnCDMax = 5f;
 
         //Status
-        float spawnTimer = 0;
+        private float spawnTimer = 0;
 
         //Cache
-        float extentX;
-        float extentY;
-        float extentZ;
+        private float extentX;
+        private float extentY;
+        private float extentZ;
 
         #region Mono
         private void Awake()
@@ -81,22 +81,3 @@ namespace TafeDiplomaFramework.AI
         }
     }
 }
-
-/*
- private void OnDrawGizmosSelected() //Great for drawing range of towers
-        {
-            //Store default matrix
-            Matrix4x4 baseMatrix = Gizmos.matrix; 
-
-            //Matrix is like a 2D array, it's what Unity uses to draw.
-            Matrix4x4 rotationMatrix = transform.localToWorldMatrix;
-            Gizmos.matrix = rotationMatrix;
-
-            //Draw a green, partially transparent cube
-            Gizmos.color = new Color(0, 1, 0, 0.5f);
-            Gizmos.DrawCube(Vector3.zero, size);
-
-            //Reset the gizmos matrix back to default
-            Gizmos.matrix = baseMatrix;
-        }
- */

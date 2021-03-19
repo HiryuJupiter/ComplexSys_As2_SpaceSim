@@ -4,15 +4,20 @@ using UnityEngine;
 
 namespace HiryuTK.TopDownController
 {
-    public class Module_Mining : ModuleBase
+    public class Module_Mining : MonoBehaviour
     {
         private float miningCooldownTimer;
+        private PlayerTopDown3DController player;
+        private Settings_TopDownController settings;
 
-        public Module_Mining(PlayerTopDown3DController motor, PlayerFeedbacks feedback) : base(motor, feedback)  { }
-
-        public override void TickUpdate()
+        private void Start()
         {
-            base.TickUpdate();
+            player = GetComponent<PlayerTopDown3DController>();
+            settings = Settings_TopDownController.Instance;
+        }
+
+        private void Update()
+        {
             if (Input.GetMouseButton(1) || Input.GetKey(KeyCode.K))
             {
                 ShootMiningBeam();
@@ -44,9 +49,9 @@ namespace HiryuTK.TopDownController
 
             player.LineRenderer.enabled = true;
 
-            if (hit.collider != null) //maybe hit.collider != null 
+            if (hit.collider != null) 
             {
-                //Debug.DrawLine(player.ShootPoint.position, hit.point, Color.red, 1f);
+                Debug.DrawLine(player.ShootPoint.position, hit.point, Color.red, 1f);
                 player.LineRenderer.startColor = Color.yellow;
                 player.LineRenderer.endColor = Color.yellow;
                 player.LineRenderer.SetPositions(new Vector3[] { player.ShootPoint.position, hit.point });
@@ -60,15 +65,11 @@ namespace HiryuTK.TopDownController
                         MineAsteroid(asteroid);
                         miningCooldownTimer = settings.CD_Mining;
                     }
-                    else
-                    {
-                        Debug.Log("Error");
-                    }
                 }
             }
             else
             {
-                //Debug.DrawLine(player.ShootPoint.position, mousePos, Color.blue, 1f);
+                Debug.DrawLine(player.ShootPoint.position, mousePos, Color.blue, 1f);
                 player.LineRenderer.SetPositions(new Vector3[] { player.ShootPoint.position, mousePos });
                 player.LineRenderer.widthMultiplier = 0.05f;
                 player.LineRenderer.startColor = Color.grey;

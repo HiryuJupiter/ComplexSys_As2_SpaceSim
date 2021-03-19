@@ -4,12 +4,11 @@ using UnityEngine;
 namespace HiryuTK.TopDownController
 {
     /// <summary>
-    /// We use this instead an interface (e.g. IPoolable) because the inspector
-    /// cannot reference interface. Thus, relying on this is more reliable 
-    /// when assigning prefabs.
-    /// The downside of this is that the prefab must inherit this as the 
-    /// base class instead of MonoBehaviour. This can be an issue where 
-    /// a prefab cannot do this. 
+    /// We will use this base class instead an interface (IPoolable) for the poolable
+    /// prefabs, as the inspector cannot reference prefabs (via drag and drop) 
+    /// using an interface type, and I want to avoid referencing a prefab by 
+    /// GameObject type. The downside of doing this is that the prefab must 
+    /// inherit from this base class instead of MonoBehaviour. 
     /// </summary>
     public abstract class PoolObject : MonoBehaviour
     {
@@ -19,18 +18,11 @@ namespace HiryuTK.TopDownController
         {
             this.pool = pool;
         }
-        public virtual void Activation() { }
-        public virtual void Activation(Vector2 p) 
-        {
-            transform.position = p;
-            Activation();
-        }
 
         public virtual void Activation(Vector2 p, Quaternion r) 
         {
             transform.position = p;
             transform.rotation = r;
-            Activation();
         }
 
         protected virtual void Despawn()

@@ -12,10 +12,9 @@ namespace HiryuTK.TopDownController
 
         public GameObject Bullet => bullet;
 
-        void Awake()
+        private void Awake()
         {
             Instance = this;
         }
-
     }
 }

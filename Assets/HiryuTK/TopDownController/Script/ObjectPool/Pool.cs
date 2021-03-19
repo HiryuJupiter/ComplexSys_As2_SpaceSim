@@ -17,10 +17,6 @@ namespace HiryuTK.TopDownController
         {
             this.prefab = prefab;
             this.parent = parent;
-            if (prefab.GetComponent<PoolObject>() == null)
-            {
-                Debug.LogWarning("Object is not a valid PoolObject type");
-            }
         }
 
         public PoolObject Spawn(Vector3 p, Quaternion r)
@@ -42,49 +38,6 @@ namespace HiryuTK.TopDownController
                 go.GetComponent<PoolObject>().InitialSpawn(this);
             }
             go.GetComponent<PoolObject>().Activation(p, r);
-            active.Add(go);
-            return go;
-        }
-
-        public PoolObject Spawn(Vector3 p)
-        {
-            PoolObject go;
-            if (inactive.Count > 0)
-            {
-                //If object pool is not empty, then take an object from the pool and make it active
-                go = inactive[0];
-                go.gameObject.SetActive(true);
-                inactive.RemoveAt(0);
-                go.transform.position = p;
-            }
-            else
-            {
-                //If object pool is empty, then spawn a new object.
-                go = GameObject.Instantiate(prefab, p, Quaternion.identity, parent);
-                go.GetComponent<PoolObject>().InitialSpawn(this);
-            }
-            go.GetComponent<PoolObject>().Activation(p);
-            active.Add(go);
-            return go;
-        }
-
-        public PoolObject Spawn()
-        {
-            PoolObject go;
-            if (inactive.Count > 0)
-            {
-                //If object pool is not empty, then take an object from the pool and make it active
-                go = inactive[0];
-                go.gameObject.SetActive(true);
-                inactive.RemoveAt(0);
-            }
-            else
-            {
-                //If object pool is empty, then spawn a new object.
-                go = GameObject.Instantiate(prefab, offscreen, Quaternion.identity, parent);
-                go.GetComponent<PoolObject>().InitialSpawn(this);
-            }
-            go.GetComponent<PoolObject>().Activation();
             active.Add(go);
             return go;
         }

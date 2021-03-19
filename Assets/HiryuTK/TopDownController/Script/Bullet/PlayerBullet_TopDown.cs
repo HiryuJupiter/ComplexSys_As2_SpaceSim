@@ -5,8 +5,8 @@ namespace HiryuTK.TopDownController
 {
     public class PlayerBullet_TopDown : PoolObject
     {
-        Settings_TopDownController settings;
-        Rigidbody2D rb;
+        private Settings_TopDownController settings;
+        private Rigidbody2D rb;
 
         public override void InitialSpawn(Pool pool)
         {

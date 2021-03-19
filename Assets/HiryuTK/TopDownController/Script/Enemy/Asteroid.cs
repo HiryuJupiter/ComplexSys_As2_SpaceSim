@@ -90,7 +90,6 @@ namespace HiryuTK.TopDownController
 
         void FixedUpdate()
         {
-            //transform.Translate(Vector3.forward * Time.deltaTime * moveSpeed);
             transform.Translate(rawForward * Time.deltaTime * moveSpeed, Space.World);
             transform.Rotate(new Vector3(0f, 0f, 1f), rotationSpeed * Time.deltaTime, Space.World);
         }

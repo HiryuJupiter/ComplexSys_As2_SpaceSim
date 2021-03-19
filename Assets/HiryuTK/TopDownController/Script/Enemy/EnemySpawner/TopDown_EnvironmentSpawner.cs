@@ -7,7 +7,6 @@ namespace HiryuTK.TopDownController
     {
         [SerializeField] private float spawnIntervalMin = 2f;
         [SerializeField] private float spawnIntervalMax = 10f;
-        //[SerializeField] private GameObject prefab = null;
 
         private Settings_TopDownController settings;
         private ObjectPoolManager_TopDown poolM;
@@ -39,11 +38,10 @@ namespace HiryuTK.TopDownController
                 }
                 else
                 {
-                    SpawnAsteroid();
-                    //if (Random.Range(0, 2) == 0)
-                    //    SpawnAsteroid();
-                    //else
-                    //    SpawnEnemyShip();
+                    if (Random.Range(0, 2) == 0)
+                        SpawnAsteroid();
+                    else
+                        SpawnEnemyShip();
                     spawnCount--;
                     RefreshTimer();
                 }
@@ -66,7 +64,6 @@ namespace HiryuTK.TopDownController
             Vector3 p = settings.RandomSpawnPoint();
             Quaternion r = settings.RandomSpawnRotation(p);
             Debug.DrawRay(p, r * Vector3.up * 10f, Color.red, 10f);
-            //Instantiate(prefab, p, r);
             poolM.SpawnAsteroid(p, r);
         }
 
@@ -75,7 +72,6 @@ namespace HiryuTK.TopDownController
             Vector3 p = settings.RandomSpawnPoint();
             Quaternion r = settings.RandomSpawnRotation(p);
             Debug.DrawRay(p, r * Vector3.up * 10f, Color.red, 10f);
-            //Instantiate(prefab, p, r);
             poolM.SpawnEnemyShip(p, r);
         }
     }

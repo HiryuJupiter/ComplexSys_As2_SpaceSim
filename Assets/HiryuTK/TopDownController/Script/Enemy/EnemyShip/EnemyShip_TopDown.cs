@@ -51,15 +51,17 @@ namespace HiryuTK.TopDownController
 
         private void FixedUpdate()
         {
-            //transform.rotation = Quaternion.LookRotation(moveDir, -Vector3.forward);  //Lerp this later
-
             //Rotate towards player
-            Vector3 dirToPlayer = player.transform.position - transform.position;
-            Quaternion targetRot = Quaternion.LookRotation(Vector3.forward, dirToPlayer);
-            transform.rotation = Quaternion.Lerp(transform.rotation, targetRot, settings.EnemyRotation * Time.deltaTime);
+            if (player != null)
+            {
+                Vector3 dirToPlayer = player.transform.position - transform.position;
+                Quaternion targetRot = Quaternion.LookRotation(Vector3.forward, dirToPlayer);
+                transform.rotation = Quaternion.Lerp(transform.rotation, targetRot, settings.EnemyRotation * Time.deltaTime);
 
-            transform.Translate(transform.up * settings.EnemyMove * Time.deltaTime, Space.World);
-            //Debug.DrawRay(transform.position, transform.up, Color.magenta, 10f);
+                transform.Translate(transform.up * settings.EnemyMove * Time.deltaTime, Space.World);
+                //Debug.DrawRay(transform.position, transform.up, Color.magenta, 10f);
+            }
+
         }
 
         private void OnTriggerEnter2D(Collider2D collision)

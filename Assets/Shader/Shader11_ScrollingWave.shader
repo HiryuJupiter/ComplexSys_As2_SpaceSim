@@ -65,6 +65,10 @@ Shader "Unlit/Shader11_ScrollingWave"
                //float t = saturate( InverseLerp(_ColorStart, _ColorEnd, i.uv.x));
                //float t = abs(frac(i.uv.x * _Repeats)* 2 - 1);
 
+                //This is the improved version:
+                                //float xOffset = cos(i.uv.x * TAU * _InnerWaveFrequency) * _InnerWaveAmplitude;
+                //float t = (cos((i.uv.y * TAU * _OuterWaveFrequency + xOffset - _Time.y)) * .5f + 0.5);
+
                 float xOffset = cos((i.uv.x) * TAU * _Repeats) * .02 ;
                 float t = cos((i.uv.y + xOffset - _Time.y) * TAU * _Repeats ) * .5 + 0.5 ;
                 return lerp(_ColorA, _ColorB, t);

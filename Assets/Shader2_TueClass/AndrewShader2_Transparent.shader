@@ -11,7 +11,7 @@ Shader "Unlit/AndrewShader2_Transparent"
 		_OuterWaveFrequency("OuterWaveFrequency", Range(0, 100)) = 4.2
 		_InnerWaveAmplitude("InnerWaveAmplitude", Range(0, 100)) = 0.6
 		_InnerWaveFrequency("InnerWaveFrequency", Range(0, 100)) = 8
-	//_RefrColor("Refraction color", Color) = (.34, .85, .92, 1)
+		//_RefrColor("Refraction color", Color) = (.34, .85, .92, 1)
 	}
 
 	SubShader
@@ -82,7 +82,7 @@ Shader "Unlit/AndrewShader2_Transparent"
 			{
 				v2f o;
 				o.vertex = UnityObjectToClipPos(v.vertex);
-				o.vertex = UnityObjectToWorldNormal(v.normals);
+				o.normal = UnityObjectToWorldNormal(v.normals);
 				o.uv = v.uv;
 				return o;
 			}

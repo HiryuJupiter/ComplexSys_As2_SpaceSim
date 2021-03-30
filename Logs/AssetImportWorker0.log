@@ -175,3 +175,39 @@ System memory in use after: 58.1 MB.
 Unloading 8 unused Assets to reduce memory usage. Loaded Objects now: 1558.
 Total: 1.901500 ms (FindLiveObjects: 0.146200 ms CreateObjectMapping: 0.030600 ms MarkObjects: 1.593900 ms  DeleteObjects: 0.129800 ms)
 
+========================================================================
+Received Import Request.
+  Time since last request: 4935.107522 seconds.
+  path: Assets/Shader2_TueClass/AndrewShader2_Transparent.shader
+  artifactKey: Guid(cac7ec74ff2c71448939d97df3cbb33e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Shader2_TueClass/AndrewShader2_Transparent.shader using Guid(cac7ec74ff2c71448939d97df3cbb33e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00000000000000000000000000000000') in 0.012784 seconds
+  ERROR: Build asset version error: assets/shader2_tueclass/andrewshader2_transparent.shader in SourceAssetDB has modification time of '2021-03-30T00:52:59.5236151Z' while content on disk has modification time of '2021-03-30T00:53:02.736462Z'
+  Import took 0.015400 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.003153 seconds.
+  path: Assets/Shader2_TueClass/AndrewShader2_Transparent.shader
+  artifactKey: Guid(cac7ec74ff2c71448939d97df3cbb33e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Shader2_TueClass/AndrewShader2_Transparent.shader using Guid(cac7ec74ff2c71448939d97df3cbb33e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00000000000000000000000000000000') in 0.000923 seconds
+  ERROR: Build asset version error: assets/shader2_tueclass/andrewshader2_transparent.shader in SourceAssetDB has modification time of '2021-03-30T00:52:59.5236151Z' while content on disk has modification time of '2021-03-30T00:53:02.736462Z'
+  Import took 0.002547 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.015755 seconds.
+  path: Assets/Shader2_TueClass/AndrewShader2_Transparent.shader
+  artifactKey: Guid(cac7ec74ff2c71448939d97df3cbb33e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Shader2_TueClass/AndrewShader2_Transparent.shader using Guid(cac7ec74ff2c71448939d97df3cbb33e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00000000000000000000000000000000') in 0.000975 seconds
+  ERROR: Build asset version error: assets/shader2_tueclass/andrewshader2_transparent.shader in SourceAssetDB has modification time of '2021-03-30T00:52:59.5236151Z' while content on disk has modification time of '2021-03-30T00:53:02.736462Z'
+  Import took 0.002699 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 3.661321 seconds.
+  path: Assets/Shader2_TueClass/AndrewShader2_Transparent.shader
+  artifactKey: Guid(cac7ec74ff2c71448939d97df3cbb33e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Shader2_TueClass/AndrewShader2_Transparent.shader using Guid(cac7ec74ff2c71448939d97df3cbb33e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00000000000000000000000000000000') in 0.000892 seconds
+  ERROR: Build asset version error: assets/shader2_tueclass/andrewshader2_transparent.shader in SourceAssetDB has modification time of '2021-03-30T00:52:59.5236151Z' while content on disk has modification time of '2021-03-30T00:53:02.736462Z'
+  Import took 0.003092 seconds .
+

@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-namespace HiryuTK.TopDownController
+namespace HiryuTK.AsteroidsTopDownController
 {
     /// <summary>
     /// Class for controlling the player's bullet
@@ -9,7 +9,7 @@ namespace HiryuTK.TopDownController
     public class PlayerBullet_TopDown : PoolObject
     {
         //References
-        private Settings_TopDownController settings;
+        private Settings settings;
         private Rigidbody2D rb;
 
         #region Object pool
@@ -17,7 +17,7 @@ namespace HiryuTK.TopDownController
         {
             //Set the object's pool reference, then reference classes and components
             base.InitialSpawn(pool);
-            settings = Settings_TopDownController.Instance;
+            settings = Settings.Instance;
             rb = GetComponent<Rigidbody2D>();
         }
 
@@ -41,8 +41,8 @@ namespace HiryuTK.TopDownController
         private void OnTriggerEnter2D(Collider2D collision)
         {
             //Make this able to damage enemies and asteroids upon collision
-            if (Settings_TopDownController.Instance.IsTargetOnEnemyLayer(collision.gameObject) ||
-                Settings_TopDownController.Instance.IsTargetOnGroundLayer(collision.gameObject))
+            if (Settings.Instance.IsTargetOnEnemyLayer(collision.gameObject) ||
+                Settings.Instance.IsTargetOnGroundLayer(collision.gameObject))
             {
                 collision.gameObject.GetComponent<IDamagable>().TakeDamage(1);
                 Despawn();

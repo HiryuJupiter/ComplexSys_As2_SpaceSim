@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace HiryuTK.TopDownController
+namespace HiryuTK.AsteroidsTopDownController.Enemy
 {
     /// <summary>
     /// The class for managing the Asteroids that can fly around and hit the player
@@ -19,7 +19,7 @@ namespace HiryuTK.TopDownController
         private  Vector3 rawForward;
         private  Vector3 transForward;
         private  Vector3 initalScale;
-        private  Settings_TopDownController settings;
+        private  Settings settings;
 
         #region Interface
         /// <summary>
@@ -64,7 +64,7 @@ namespace HiryuTK.TopDownController
         {
             base.InitialSpawn(pool);
             //Reference
-            settings = Settings_TopDownController.Instance;
+            settings = Settings.Instance;
             initalScale = transform.localScale;
         }
 

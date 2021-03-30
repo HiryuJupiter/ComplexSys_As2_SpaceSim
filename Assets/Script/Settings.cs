@@ -1,15 +1,15 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-namespace HiryuTK.TopDownController
+namespace HiryuTK.AsteroidsTopDownController
 {
     /// <summary>
     /// For setting the game's settings all in one place
     /// </summary>
     [DefaultExecutionOrder(-90000000)]
-    public class Settings_TopDownController : MonoBehaviour
+    public class Settings : MonoBehaviour
     {
-        public static Settings_TopDownController Instance { get; private set; }
+        public static Settings Instance { get; private set; }
 
         [Header("Stats")]
         [SerializeField] private int playerHealth = 3;

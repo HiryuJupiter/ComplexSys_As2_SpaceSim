@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace HiryuTK.TopDownController
+namespace HiryuTK.AsteroidsTopDownController
 {
     /// <summary>
     /// For displaying UI elements

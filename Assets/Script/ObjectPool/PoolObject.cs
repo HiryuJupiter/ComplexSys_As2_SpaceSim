@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-namespace HiryuTK.TopDownController
+namespace HiryuTK.AsteroidsTopDownController
 {
     /// <summary>
     /// We will use this base class instead an interface (IPoolable) for the poolable

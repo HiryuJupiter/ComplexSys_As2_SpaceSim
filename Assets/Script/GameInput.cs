@@ -1,15 +1,15 @@
 ﻿using UnityEngine;
 
-namespace HiryuTK.TopDownController
+namespace HiryuTK.AsteroidsTopDownController
 {
     /// <summary>
     /// For detecting input for this game
     /// </summary>
     [DefaultExecutionOrder(-1000)]
-    public class GameInput_TopDownController : MonoBehaviour
+    public class GameInput : MonoBehaviour
     {
         //Fields
-        public static GameInput_TopDownController Instance;
+        public static GameInput Instance;
         public static float MoveX { get; set; }
         public static float MoveY { get; set; }
         public static bool JumpBtnDown { get; set; }

@@ -3,7 +3,7 @@ using UnityEngine.SceneManagement;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace HiryuTK.TopDownController
+namespace HiryuTK.AsteroidsTopDownController
 {
     /// <summary>
     /// This class controls the player's ship
@@ -19,7 +19,7 @@ namespace HiryuTK.TopDownController
         [SerializeField] private LineRenderer lineRenderer;
 
         //Class and components
-        private Settings_TopDownController settings;
+        private Settings settings;
         private UIManager_TopDown uiM;
 
         private Rigidbody2D rb;
@@ -68,7 +68,7 @@ namespace HiryuTK.TopDownController
         private void Start()
         {
             //Reference and initialize
-            settings = Settings_TopDownController.Instance;
+            settings = Settings.Instance;
             uiM = UIManager_TopDown.Instance;
 
             rb = GetComponent<Rigidbody2D>();
@@ -98,8 +98,8 @@ namespace HiryuTK.TopDownController
         private void OnTriggerEnter2D(Collider2D collision)
         {
             //When htting enemy or asteroid...
-            if (Settings_TopDownController.Instance.IsTargetOnEnemyLayer(collision.gameObject) || 
-                Settings_TopDownController.Instance.IsTargetOnGroundLayer(collision.gameObject))
+            if (Settings.Instance.IsTargetOnEnemyLayer(collision.gameObject) || 
+                Settings.Instance.IsTargetOnGroundLayer(collision.gameObject))
             {
                 //Damge the other object and damage the player
                 Debug.Log("player hits damaging object");
@@ -113,7 +113,7 @@ namespace HiryuTK.TopDownController
         private void UpdateMovement()
         {
             //The ship can only move forward
-            float drive = Mathf.Clamp(GameInput_TopDownController.MoveY, 0f, 1f);
+            float drive = Mathf.Clamp(GameInput.MoveY, 0f, 1f);
 
             //lerp the move speed so it's smooth
             velocity.y = Mathf.Lerp(velocity.y, drive * settings.MoveSpeed,
@@ -123,7 +123,7 @@ namespace HiryuTK.TopDownController
         private void UpdateRotation()
         {
             //Rotational changes should be applied slowly
-            rotDelta = Mathf.Lerp(rotDelta, GameInput_TopDownController.MoveX, settings.RotationAccleration * Time.deltaTime);
+            rotDelta = Mathf.Lerp(rotDelta, GameInput.MoveX, settings.RotationAccleration * Time.deltaTime);
             rb.rotation -= rotDelta * settings.RotationSpeed * Time.deltaTime;
         }
 

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace HiryuTK.EnvironemntalSpawner
+namespace HiryuTK.EnvironemntalSpawner.Spawner
 {
     /// <summary>
     /// For spawning objects in 3D space

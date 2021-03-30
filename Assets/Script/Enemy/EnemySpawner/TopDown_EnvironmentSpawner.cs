@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-namespace HiryuTK.TopDownController
+namespace HiryuTK.AsteroidsTopDownController.Enemy
 {
     /// <summary>
     /// A spawner for spawning asteroids and enemy ships
@@ -12,7 +12,7 @@ namespace HiryuTK.TopDownController
         [SerializeField] private float spawnIntervalMin = 2f;
         [SerializeField] private float spawnIntervalMax = 10f;
 
-        private Settings_TopDownController settings;
+        private Settings settings;
         private ObjectPoolManager_TopDown poolM;
 
         private float timer = 0f;
@@ -22,7 +22,7 @@ namespace HiryuTK.TopDownController
         private void Start()
         {
             //Reference then start spawning
-            settings    = Settings_TopDownController.Instance;
+            settings    = Settings.Instance;
             poolM       = ObjectPoolManager_TopDown.Instance;
             Spawn();
         }

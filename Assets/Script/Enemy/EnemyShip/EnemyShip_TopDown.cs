@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace HiryuTK.TopDownController
+namespace HiryuTK.AsteroidsTopDownController.Enemy
 {
     public class EnemyShip_TopDown : PoolObject, IDamagable
     {
         //Fields
         private PlayerTopDown3DController player;
-        Settings_TopDownController settings;
+        Settings settings;
 
         #region Public
         /// <summary>
@@ -29,7 +29,7 @@ namespace HiryuTK.TopDownController
         public override void InitialSpawn(Pool pool)
         {
             base.InitialSpawn(pool);
-            settings = Settings_TopDownController.Instance;
+            settings = Settings.Instance;
             player = PlayerTopDown3DController.Instance;
         }
 

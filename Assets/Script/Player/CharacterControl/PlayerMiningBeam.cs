@@ -2,21 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace HiryuTK.TopDownController
+namespace HiryuTK.AsteroidsTopDownController
 {
     public class PlayerMiningBeam : MonoBehaviour
     {
         //Fields
         private float miningCooldownTimer;
         private PlayerTopDown3DController player;
-        private Settings_TopDownController settings;
+        private Settings settings;
         private bool isSetup;
 
         //This has to be set up before it can be used
         public void Setup(PlayerTopDown3DController player)
         {
             this.player = player;
-            settings = Settings_TopDownController.Instance;
+            settings = Settings.Instance;
             isSetup = true;
         }
 

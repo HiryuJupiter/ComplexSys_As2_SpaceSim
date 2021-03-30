@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-namespace HiryuTK.TopDownController
+namespace HiryuTK.AsteroidsTopDownController
 {
     /// <summary>
     /// Class for handling player shooting
@@ -11,7 +11,7 @@ namespace HiryuTK.TopDownController
         //Fields
         private ObjectPoolManager_TopDown poolM;
         private PlayerTopDown3DController player;
-        private Settings_TopDownController settings;
+        private Settings settings;
         private float shootCooldownTimer;
         private bool isSetup;
 
@@ -24,7 +24,7 @@ namespace HiryuTK.TopDownController
             //Reference and initialization
             this.player = player;
             poolM = ObjectPoolManager_TopDown.Instance;
-            settings = Settings_TopDownController.Instance;
+            settings = Settings.Instance;
             isSetup = true;
         }
 

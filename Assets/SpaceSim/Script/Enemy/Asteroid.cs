@@ -17,7 +17,6 @@ namespace HiryuTK.AsteroidsTopDownController.Enemy
         private  float moveSpeed;
         private  float rotationSpeed;
         private  Vector3 rawForward;
-        private  Vector3 transForward;
         private  Vector3 initalScale;
         private  Settings settings;
 

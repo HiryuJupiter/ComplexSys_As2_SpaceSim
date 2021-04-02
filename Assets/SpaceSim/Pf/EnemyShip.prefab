@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4432354256745883898}
   - component: {fileID: 4432354256745883896}
   - component: {fileID: 4432354256745883899}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: Cube (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -90,7 +90,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4432354257062271446}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -122,7 +122,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4432354257352126038}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: ShootPoint
   m_TagString: Untagged
   m_Icon: {fileID: 2974397684917235467, guid: 0000000000000000d000000000000000, type: 0}
@@ -154,7 +154,7 @@ GameObject:
   - component: {fileID: 4432354258571912602}
   - component: {fileID: 4432354258571912600}
   - component: {fileID: 4432354258571912603}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -236,7 +236,7 @@ GameObject:
   - component: {fileID: 4432354258647925424}
   - component: {fileID: 4432354258647925427}
   - component: {fileID: 1489479190223848715}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: EnemyShip
   m_TagString: Enemy
   m_Icon: {fileID: 0}

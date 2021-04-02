@@ -9,21 +9,19 @@ namespace HiryuTK.AsteroidsTopDownController
     [DefaultExecutionOrder(-90000000)]
     public class Settings : MonoBehaviour
     {
-        public static Settings Instance { get; private set; }
-
         [Header("Stats")]
         [SerializeField] private int playerHealth = 3;
         public LayerMask PlayerMaxHealth => playerHealth;
 
         [Header("Abilities")]
-        [SerializeField] private float basicBullet_speed = 20f;
-        [SerializeField] private float cd_BasicAttack = 1f;
-        [SerializeField] private float cd_Mining = 0.1f;
+        [SerializeField] private float basicBulletSeed = 20f;
+        [SerializeField] private float basicAttackCD = 1f;
+        [SerializeField] private float miningCD = 0.1f;
         [SerializeField] private float miningPower = 5f;
         [SerializeField] private float miningDistance = 50f;
-        public float BasicBullet_speed => basicBullet_speed;
-        public float CD_BasicAttack => cd_BasicAttack;
-        public float CD_Mining => cd_Mining;
+        public float BasicBulletSpeed => basicBulletSeed;
+        public float BasicAttackCD => basicAttackCD;
+        public float MiningCD => miningCD;
         public float MiningPower => miningPower;
         public float MiningDistance => miningDistance;
 
@@ -57,23 +55,26 @@ namespace HiryuTK.AsteroidsTopDownController
         public float AsteroidMove => asteroidMove;
         public float AsteroidRotation => asteroidRotation;
 
-        public float ScreenBound_Top { get; private set; }
-        public float ScreenBound_Bot { get; private set; }
-        public float ScreenBound_Left { get; private set; }
-        public float ScreenBound_Right { get; private set; }
-        public float innerSideline_Top { get; private set; }
-        public float innerSideline_Bot { get; private set; }
-        public float innerSideline_Left { get; private set; }
-        public float innerSideline_Right { get; private set; }
-        public float outerSideline_Top { get; private set; }
-        public float outerSideline_Bot { get; private set; }
-        public float outerSideline_Left { get; private set; }
-        public float outerSideline_Right { get; private set; }
+        //Private field
+        private float[] xDivisionPoints;
+        private float[] yDivisionPoints;
 
+        private float screenBound_Top;
+        private float screenBound_Bot;
+        private float screenBound_Left;
+        private float screenBound_Right;
+        private float innerSideline_Top;
+        private float innerSideline_Bot;
+        private float innerSideline_Left;
+        private float innerSideline_Right;
+        private float outerSideline_Top;
+        private float outerSideline_Bot;
+        private float outerSideline_Left;
+        private float outerSideline_Right;
 
-        //Cache for spawn point calculation
-        private float[] xSubPoints;
-        private float[] ySubPoints;
+        //Properties
+        public static Settings Instance { get; private set; }
+        private bool RandomBool => Random.Range(0, 2) == 0;
 
         private void Awake()
         {
@@ -84,16 +85,16 @@ namespace HiryuTK.AsteroidsTopDownController
             Vector2 lowerLeft = Camera.main.ScreenToWorldPoint(new Vector2(0f, 0f));
             Vector2 upperRight = Camera.main.ScreenToWorldPoint(new Vector2(Screen.width, Screen.height));
 
-            ScreenBound_Top = upperRight.y;
-            ScreenBound_Bot = lowerLeft.y;
-            ScreenBound_Left = lowerLeft.x;
-            ScreenBound_Right = upperRight.x;
+            screenBound_Top = upperRight.y;
+            screenBound_Bot = lowerLeft.y;
+            screenBound_Left = lowerLeft.x;
+            screenBound_Right = upperRight.x;
 
             float offset = .4f;
-            innerSideline_Top = ScreenBound_Top + offset;
-            innerSideline_Bot = ScreenBound_Bot - offset;
-            innerSideline_Left = ScreenBound_Left - offset;
-            innerSideline_Right = ScreenBound_Right + offset;
+            innerSideline_Top = screenBound_Top + offset;
+            innerSideline_Bot = screenBound_Bot - offset;
+            innerSideline_Left = screenBound_Left - offset;
+            innerSideline_Right = screenBound_Right + offset;
 
             float offsetSmall = 1f;
             outerSideline_Top = innerSideline_Top + offsetSmall;
@@ -114,27 +115,27 @@ namespace HiryuTK.AsteroidsTopDownController
 
             //Initialize the subdivision points in the middle of the zone.
             int xDivisions = 4;
-            float xdivisionDist = (ScreenBound_Right - ScreenBound_Left) / xDivisions;
-            xSubPoints = new float[xDivisions - 1];
+            float xdivisionDist = (screenBound_Right - screenBound_Left) / xDivisions;
+            xDivisionPoints = new float[xDivisions - 1];
             for (int i = 0; i < xDivisions - 1; i++)
             {
-                xSubPoints[i] = ScreenBound_Left + xdivisionDist * (1 + i);
+                xDivisionPoints[i] = screenBound_Left + xdivisionDist * (1 + i);
             }
 
             int yDivisions = 4;
-            float ydivisionDist = (ScreenBound_Top - ScreenBound_Bot) / yDivisions;
-            ySubPoints = new float[yDivisions - 1];
+            float ydivisionDist = (screenBound_Top - screenBound_Bot) / yDivisions;
+            yDivisionPoints = new float[yDivisions - 1];
             for (int i = 0; i < yDivisions - 1; i++)
             {
-                ySubPoints[i] = ScreenBound_Bot + ydivisionDist * (1 + i);
+                yDivisionPoints[i] = screenBound_Bot + ydivisionDist * (1 + i);
             }
 
             //Debug 
-            for (int x = 0; x < xSubPoints.Length; x++)
+            for (int x = 0; x < xDivisionPoints.Length; x++)
             {
-                for (int z = 0; z < ySubPoints.Length; z++)
+                for (int z = 0; z < yDivisionPoints.Length; z++)
                 {
-                    Vector2 p = new Vector2(xSubPoints[x], ySubPoints[z]);
+                    Vector2 p = new Vector2(xDivisionPoints[x], yDivisionPoints[z]);
                     Debug.DrawLine(p, p + Vector2.right, Color.magenta, 10f);
                 }
             }
@@ -154,14 +155,14 @@ namespace HiryuTK.AsteroidsTopDownController
             if (RandomBool)
             {
                 //Spawn top and bottom
-                float x = Random.Range(ScreenBound_Left, ScreenBound_Right);
+                float x = Random.Range(screenBound_Left, screenBound_Right);
                 float y = RandomBool ? innerSideline_Bot : innerSideline_Top;
                 return new Vector2(x, y);
             }
             else
             {
                 //Spawn left and right edge
-                float y = Random.Range(ScreenBound_Top, ScreenBound_Bot);
+                float y = Random.Range(screenBound_Top, screenBound_Bot);
                 float x = RandomBool ? innerSideline_Left : innerSideline_Right;
                 return new Vector2(x, y);
             }
@@ -175,8 +176,8 @@ namespace HiryuTK.AsteroidsTopDownController
         public Quaternion RandomSpawnRotation(Vector2 spawnPoint)
         {
             Vector2 aim = new Vector2(
-                xSubPoints[Random.Range(0, xSubPoints.Length)],
-                ySubPoints[Random.Range(0, ySubPoints.Length)]);
+                xDivisionPoints[Random.Range(0, xDivisionPoints.Length)],
+                yDivisionPoints[Random.Range(0, yDivisionPoints.Length)]);
             return Quaternion.LookRotation(Vector3.forward, aim - spawnPoint);
         }
 
@@ -234,6 +235,6 @@ namespace HiryuTK.AsteroidsTopDownController
         }
 
         //Get a random true false
-        bool RandomBool => Random.Range(0, 2) == 0;
+
     }
 }

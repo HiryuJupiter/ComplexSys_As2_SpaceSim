@@ -6,7 +6,7 @@ namespace HiryuTK.AsteroidsTopDownController
     /// <summary>
     /// Class for controlling the player's bullet
     /// </summary>
-    public class PlayerBullet_TopDown : PoolObject
+    public class PlayerBullet : PoolObject
     {
         //References
         private Settings settings;
@@ -25,7 +25,7 @@ namespace HiryuTK.AsteroidsTopDownController
         {
             //When this object is spawned, give it the proper velocity towards its up direction
             base.Activation(p, r);
-            rb.velocity = transform.up * settings.BasicBullet_speed;
+            rb.velocity = transform.up * settings.BasicBulletSpeed;
         }
         #endregion
 

@@ -13,7 +13,7 @@ namespace HiryuTK.AsteroidsTopDownController
     public abstract class PoolObject : MonoBehaviour
     {
         protected Pool pool;
-        bool active;
+        private bool isActive;
 
         /// <summary>
         /// Called when the object is first created in the pool
@@ -32,17 +32,17 @@ namespace HiryuTK.AsteroidsTopDownController
         /// <param name="r"></param>
         public virtual void Activation(Vector2 p, Quaternion r)
         {
-            active = true;
+            isActive = true;
             transform.position = p;
             transform.rotation = r;
         }
 
         protected virtual void Despawn()
         {
-            if (active) //Prevent situations where object despawns multiple times.
+            if (isActive) //Prevent situations where object despawns multiple times.
             {
                 pool.Despawn(this);
-                active = false;
+                isActive = false;
             }
         }
     }

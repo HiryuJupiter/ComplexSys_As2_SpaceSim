@@ -9,12 +9,15 @@ namespace HiryuTK.AsteroidsTopDownController
     public class PlayerShootingModule : MonoBehaviour
     {
         //Fields
-        private ObjectPoolManager_TopDown poolM;
+        private ObjectPoolManager poolM;
         private PlayerTopDown3DController player;
         private Settings settings;
         private float shootCooldownTimer;
         private bool isSetup;
 
+        private bool ShootingCooldownReady => shootCooldownTimer <= 0f;
+        private Quaternion RotationTowardsMouse => Quaternion.LookRotation(Vector3.forward,
+                Camera.main.ScreenToWorldPoint(Input.mousePosition) - player.ShootPoint.position);
         /// <summary>
         /// Setting up the method
         /// </summary>
@@ -23,7 +26,7 @@ namespace HiryuTK.AsteroidsTopDownController
         {
             //Reference and initialization
             this.player = player;
-            poolM = ObjectPoolManager_TopDown.Instance;
+            poolM = ObjectPoolManager.Instance;
             settings = Settings.Instance;
             isSetup = true;
         }
@@ -56,16 +59,15 @@ namespace HiryuTK.AsteroidsTopDownController
         /// </summary>
         private void Shoot()
         {
-            Quaternion r = Quaternion.LookRotation(Vector3.forward,
-                Camera.main.ScreenToWorldPoint(Input.mousePosition) - player.ShootPoint.position);
-
-            poolM.SpawnPlayerBullet(player.ShootPoint.position, r);
+            poolM.SpawnPlayerBullet(player.ShootPoint.position, RotationTowardsMouse);
             ResetTimer();
 
         }
 
-        private bool ShootingCooldownReady => shootCooldownTimer <= 0f;
-
-        private void ResetTimer() => shootCooldownTimer = settings.CD_Mining;
+        #region Helper expressions
+        //Helper expression bodies for help creating self-documenting code
+        private void ResetTimer() => shootCooldownTimer = settings.MiningCD;
+        
+        #endregion
     }
 }

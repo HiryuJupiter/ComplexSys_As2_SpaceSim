@@ -20,7 +20,7 @@ namespace HiryuTK.AsteroidsTopDownController
 
         //Class and components
         private Settings settings;
-        private UIManager_TopDown uiM;
+        private UIManager uiManager;
 
         private Rigidbody2D rb;
         private PlayerMiningBeam miningBeam;
@@ -28,8 +28,8 @@ namespace HiryuTK.AsteroidsTopDownController
 
         //Status 
         private int Money;
-        public Vector2 velocity;
-        public float rotDelta;
+        private Vector2 velocity;
+        private float rotDelta;
 
         //Properties
         public static PlayerTopDown3DController Instance { get; private set; }
@@ -45,7 +45,7 @@ namespace HiryuTK.AsteroidsTopDownController
         public void AddMoney(int newAmount)
         {
             Money = Money + newAmount;
-            uiM.SetMoney(Money);
+            uiManager.SetMoney(Money);
         }
 
         /// <summary>
@@ -69,7 +69,7 @@ namespace HiryuTK.AsteroidsTopDownController
         {
             //Reference and initialize
             settings = Settings.Instance;
-            uiM = UIManager_TopDown.Instance;
+            uiManager = UIManager.Instance;
 
             rb = GetComponent<Rigidbody2D>();
             gun = GetComponent<PlayerShootingModule>();

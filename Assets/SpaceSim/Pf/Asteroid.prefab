@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7993843531844261430}
   - component: {fileID: 8218083341002654754}
   - component: {fileID: 7210817960215553887}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: Asteroid
   m_TagString: Ground
   m_Icon: {fileID: 0}
@@ -83,7 +83,7 @@ GameObject:
   - component: {fileID: 6271532167525236501}
   - component: {fileID: 5648678043614842811}
   - component: {fileID: 6840329744302248244}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: Asteroid
   m_TagString: Ground
   m_Icon: {fileID: 0}
@@ -127,6 +127,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -151,6 +152,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!114 &6840329744302248244
 MonoBehaviour:
   m_ObjectHideFlags: 0

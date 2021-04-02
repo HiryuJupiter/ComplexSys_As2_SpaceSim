@@ -6,14 +6,14 @@ namespace HiryuTK.AsteroidsTopDownController.Enemy
     /// <summary>
     /// A spawner for spawning asteroids and enemy ships
     /// </summary>
-    public class TopDown_EnvironmentSpawner : MonoBehaviour
+    public class Spawner : MonoBehaviour
     {
         //Fields
         [SerializeField] private float spawnIntervalMin = 2f;
         [SerializeField] private float spawnIntervalMax = 10f;
 
         private Settings settings;
-        private ObjectPoolManager_TopDown poolM;
+        private ObjectPoolManager poolM;
 
         private float timer = 0f;
         private float speedUpMod = 1f;
@@ -23,7 +23,7 @@ namespace HiryuTK.AsteroidsTopDownController.Enemy
         {
             //Reference then start spawning
             settings    = Settings.Instance;
-            poolM       = ObjectPoolManager_TopDown.Instance;
+            poolM       = ObjectPoolManager.Instance;
             Spawn();
         }
 

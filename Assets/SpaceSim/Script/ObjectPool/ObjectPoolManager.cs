@@ -7,18 +7,18 @@ namespace HiryuTK.AsteroidsTopDownController
     /// Object pool for prefabs used in this scene
     /// </summary>
     [DefaultExecutionOrder(-1)]
-    public class ObjectPoolManager_TopDown : MonoBehaviour
+    public class ObjectPoolManager : MonoBehaviour
     {
         //Fields
-        public static ObjectPoolManager_TopDown Instance;
+        public static ObjectPoolManager Instance;
 
         [Header("Pf")]
         [SerializeField] private PoolObject pf_playerBullet;
         [SerializeField] private PoolObject pf_enemyShip;
         [SerializeField] private PoolObject pf_Asteroid;
-        public Pool playerBullet { get; private set; }
-        public Pool enemyShip { get; private set; }
-        public Pool asteroids { get; private set; }
+        private Pool playerBullet;
+        private Pool enemyShip;
+        private Pool asteroids;
 
 
         void Awake()

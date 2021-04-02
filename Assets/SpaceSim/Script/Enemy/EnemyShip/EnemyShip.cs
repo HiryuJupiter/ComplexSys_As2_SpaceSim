@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace HiryuTK.AsteroidsTopDownController.Enemy
 {
-    public class EnemyShip_TopDown : PoolObject, IDamagable
+    public class EnemyShip : PoolObject, IDamagable
     {
         //Fields
         private PlayerTopDown3DController player;

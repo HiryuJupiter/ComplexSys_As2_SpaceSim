@@ -7,10 +7,10 @@ namespace HiryuTK.AsteroidsTopDownController
     /// <summary>
     /// For displaying UI elements
     /// </summary>
-    public class UIManager_TopDown : MonoBehaviour
+    public class UIManager : MonoBehaviour
     {
         //Fields
-        public static UIManager_TopDown Instance;
+        public static UIManager Instance;
 
         public Text MoneyAmount;
 

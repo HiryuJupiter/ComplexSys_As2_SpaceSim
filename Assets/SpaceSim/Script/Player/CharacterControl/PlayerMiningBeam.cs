@@ -12,6 +12,8 @@ namespace HiryuTK.AsteroidsTopDownController
         private Settings settings;
         private bool isSetup;
 
+        private bool MiningCooldownReady => miningCooldownTimer <= 0f;
+
         //This has to be set up before it can be used
         public void Setup(PlayerTopDown3DController player)
         {
@@ -78,7 +80,7 @@ namespace HiryuTK.AsteroidsTopDownController
                     if (asteroid != null)
                     {
                         MineAsteroid(asteroid);
-                        miningCooldownTimer = settings.CD_Mining;
+                        miningCooldownTimer = settings.MiningCD;
                     }
                 }
             }
@@ -105,8 +107,5 @@ namespace HiryuTK.AsteroidsTopDownController
             asteroid.Mine(settings.MiningPower);
             player.AddMoney(10);
         }
-
-        //Check if mining cooldown is ready
-        private bool MiningCooldownReady => miningCooldownTimer <= 0f;
     }
 }

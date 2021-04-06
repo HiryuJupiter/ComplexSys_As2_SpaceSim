@@ -15,7 +15,11 @@ namespace HiryuTK.AsteroidsTopDownController
         private PoolObject prefab;
         private Transform parent;
 
-        //Contructor
+        /// <summary>
+        /// Contructor
+        /// </summary>
+        /// <param name="prefab"> The prefab that is to be associated with this prefab </param>
+        /// <param name="parent"> The parent transform that all prefab will be spawned under </param>
         public Pool(PoolObject prefab, Transform parent)
         {
             this.prefab = prefab;

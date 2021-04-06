@@ -20,7 +20,6 @@ namespace HiryuTK.AsteroidsTopDownController
         private Pool enemyShip;
         private Pool asteroids;
 
-
         void Awake()
         {
             //Lazy singleton

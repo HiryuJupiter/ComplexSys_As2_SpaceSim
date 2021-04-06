@@ -16,6 +16,9 @@ namespace HiryuTK.AsteroidsTopDownController.Enemy
         private  bool alive;
         private  float moveSpeed;
         private  float rotationSpeed;
+        /// <summary>
+        /// The base forward moving force prior to modification
+        /// </summary>
         private  Vector3 rawForward;
         private  Vector3 initalScale;
         private  Settings settings;
@@ -33,7 +36,7 @@ namespace HiryuTK.AsteroidsTopDownController.Enemy
         /// <summary>
         /// Mine the asteroid with certain amount of force
         /// </summary>
-        /// <param name="force"></param>
+        /// <param name="force"> The mining force </param>
         public void Mine(float force)
         {
             //Each value will shrink the asteroid by 1%
@@ -58,7 +61,7 @@ namespace HiryuTK.AsteroidsTopDownController.Enemy
         /// <summary>
         /// When the asteroid initially spawns
         /// </summary>
-        /// <param name="pool"></param>
+        /// <param name="pool"> Object pool </param>
         public override void InitialSpawn(Pool pool)
         {
             base.InitialSpawn(pool);
@@ -70,8 +73,8 @@ namespace HiryuTK.AsteroidsTopDownController.Enemy
         /// <summary>
         /// When the asteroid is activated
         /// </summary>
-        /// <param name="p"></param>
-        /// <param name="r"></param>
+        /// <param name="p"> Position </param>
+        /// <param name="r"> Rotation </param>
         public override void Activation(Vector2 p, Quaternion r)
         {
             base.Activation(p, r);
@@ -103,7 +106,6 @@ namespace HiryuTK.AsteroidsTopDownController.Enemy
         /// <summary>
         /// Check if object has gone outside of screen bounds
         /// </summary>
-        /// <returns></returns>
         private IEnumerator DetectOutOfBounds()
         {
             //Let the aseteroid live for a while before checking, as they can be moving very slowly

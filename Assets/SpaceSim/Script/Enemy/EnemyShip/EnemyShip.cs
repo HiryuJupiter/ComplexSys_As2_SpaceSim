@@ -25,7 +25,7 @@ namespace HiryuTK.AsteroidsTopDownController.Enemy
         /// <summary>
         /// Setup references and initializations when first spawned
         /// </summary>
-        /// <param name="pool"></param>
+        /// <param name="pool"> object pool </param>
         public override void InitialSpawn(Pool pool)
         {
             base.InitialSpawn(pool);

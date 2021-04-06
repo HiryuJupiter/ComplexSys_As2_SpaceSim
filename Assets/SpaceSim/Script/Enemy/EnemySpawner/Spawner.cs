@@ -35,7 +35,6 @@ namespace HiryuTK.AsteroidsTopDownController.Enemy
         /// <summary>
         /// Coroutine that goes on forever to spawn the environmental objects
         /// </summary>
-        /// <returns></returns>
         private IEnumerator DoSpawn()
         {
             //Infinite loop

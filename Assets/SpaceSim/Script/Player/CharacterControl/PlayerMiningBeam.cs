@@ -101,7 +101,10 @@ namespace HiryuTK.AsteroidsTopDownController
             player.LineRenderer.enabled = false;
         }
 
-        //Mine the asteroid passed in
+        /// <summary>
+        /// Mine the asteroid passed in
+        /// </summary>
+        /// <param name="asteroid"> The asteroid that is to be mined </param>
         private void MineAsteroid(IMineable asteroid)
         {
             asteroid.Mine(settings.MiningPower);

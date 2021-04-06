@@ -34,7 +34,6 @@ namespace HiryuTK.EnvironemntalSpawner.Spawner
         private float extentZ;
         #endregion
 
-
         #region Mono
         private void Awake()
         {
@@ -77,7 +76,6 @@ namespace HiryuTK.EnvironemntalSpawner.Spawner
 
         private void Spawn()
         {
-            //Start coroutine to do spawn
             StartCoroutine(DoSpawn());
         }
 
